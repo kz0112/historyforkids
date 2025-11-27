@@ -6,20 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    :root {
-      --bg: #f2f7ff;
+     :root {
+      /* Негізгі түстер – пастель, жұмсақ */
+      --bg: #fff7fb;
       --bg-alt: #ffffff;
-      --primary: #2979ff;
-      --primary-soft: #e3f2fd;
-      --accent: #ffb74d;
-      --text: #08325b;
-      --text-soft: #4b647f;
-      --border-soft: #c3d7f5;
-      --danger: #e53935;
-      --success: #43a047;
-      --focus: #ffca28;
-      --radius-big: 20px;
-      --shadow-soft: 0 8px 18px rgba(15, 35, 70, 0.12);
+      --primary: #ff7aa2;
+      --primary-soft: #ffe3f0;
+      --accent: #ffd166;
+      --accent-soft: #fff3c4;
+      --text: #25324a;
+      --text-soft: #5c6a86;
+      --border-soft: #ffd3e5;
+      --danger: #ff4b5c;
+      --success: #4caf50;
+      --focus: #ffcf33;
+      --radius-big: 26px;
+      --shadow-soft: 0 10px 24px rgba(186, 120, 160, 0.25);
       --font-size-base: 18px;
       --line-height-base: 1.6;
     }
@@ -31,24 +33,41 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
       font-size: var(--font-size-base);
       line-height: var(--line-height-base);
       color: var(--text);
-      background: linear-gradient(180deg, #e3f2fd, #f9fbff);
+      background: radial-gradient(circle at 0 0, #ffe6f4 0, transparent 55%),
+                  radial-gradient(circle at 100% 0, #e1f5fe 0, transparent 55%),
+                  radial-gradient(circle at 0 100%, #fff3c4 0, transparent 55%),
+                  #fffafc;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Фонға жұмсақ «бұлттар» */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -80px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 182, 193, 0.6) 0, transparent 55%),
+        radial-gradient(circle at 85% 30%, rgba(179, 229, 252, 0.6) 0, transparent 55%),
+        radial-gradient(circle at 25% 85%, rgba(255, 224, 178, 0.7) 0, transparent 55%);
+      opacity: 0.55;
+      z-index: -2;
     }
 
     /* НАЗАР АУДАРЫҢЫЗ: бұл барлық мәтінді үлкейтеді */
-body.large-text {
-  font-size: 130% !important;
-}
+    body.large-text {
+      font-size: 130% !important;
+    }
 
-body.large-text * {
-  font-size: 1em !important;
-  line-height: 1.4em !important;
-}
-
+    body.large-text * {
+      font-size: 1em !important;
+      line-height: 1.4em !important;
+    }
 
     body.high-contrast {
       --bg: #ffffff;
@@ -56,6 +75,7 @@ body.large-text * {
       --primary: #000000;
       --primary-soft: #eeeeee;
       --accent: #ffff00;
+      --accent-soft: #ffffb3;
       --text: #000000;
       --text-soft: #111111;
       --border-soft: #000000;
@@ -74,25 +94,27 @@ body.large-text * {
       color: #fff;
       padding: 8px 16px;
       z-index: 1000;
+      border-radius: 999px;
     }
 
     .skip-link:focus {
       left: 10px;
     }
 
+    /* ===== HEADER / ЖОҒАРҒЫ БӨЛІК ===== */
     header {
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(242, 247, 255, 0.96);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(195, 215, 245, 0.7);
+      background: rgba(255, 247, 251, 0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 2px dashed rgba(255, 189, 214, 0.7);
     }
 
     .header-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 10px 16px;
+      padding: 8px 16px 12px;
       display: flex;
       align-items: center;
       gap: 16px;
@@ -106,16 +128,18 @@ body.large-text * {
     }
 
     .logo-circle {
-      width: 40px;
-      height: 40px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffeb3b, #ff9800);
+      background:
+        radial-gradient(circle at 30% 30%, #fff3c4, #ffafcc);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      color: #1a237e;
-      box-shadow: var(--shadow-soft);
+      color: #5c1347;
+      box-shadow: 0 4px 10px rgba(255, 143, 190, 0.55);
+      border: 3px solid #ffe3f0;
     }
 
     .logo-text-main {
@@ -124,7 +148,7 @@ body.large-text * {
     }
 
     .logo-text-sub {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-soft);
     }
 
@@ -137,20 +161,21 @@ body.large-text * {
 
     .nav-btn {
       border: none;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: var(--primary-soft);
+      background: var(--accent-soft);
       color: var(--text);
       font-size: 0.85rem;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
       white-space: nowrap;
+      box-shadow: 0 3px 0 rgba(255, 193, 7, 0.65);
     }
 
     .nav-btn:hover,
     .nav-btn:focus {
-      background: var(--primary);
-      color: #fff;
+      background: var(--accent);
+      color: #5a2b00;
       outline: none;
       transform: translateY(-1px);
     }
@@ -171,28 +196,29 @@ body.large-text * {
       border-radius: 999px;
       border: 1px dashed var(--border-soft);
       background: #fff;
-      padding: 4px 10px;
+      padding: 4px 12px;
       font-size: 0.8rem;
       cursor: pointer;
+      box-shadow: 0 2px 0 rgba(255, 182, 193, 0.6);
     }
 
     main {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 16px;
-      padding-bottom: 64px;
+      padding: 18px 16px 64px;
     }
 
+    /* ===== HERO БЛОК (БАСТЫ ЭКРАН) ===== */
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
-      gap: 20px;
-      margin-top: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
+      gap: 22px;
+      margin-top: 14px;
+      margin-bottom: 28px;
       align-items: center;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
       }
@@ -200,28 +226,57 @@ body.large-text * {
 
     .hero-card {
       background: var(--bg-alt);
-      border-radius: 24px;
-      padding: 20px;
+      border-radius: 32px;
+      padding: 22px 20px 20px;
       box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-soft);
+      border: 3px solid #ffe3f0;
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 224, 178, 0.55);
+      border-radius: 50%;
+      top: -40px;
+      right: -30px;
+      z-index: -1;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background: rgba(179, 229, 252, 0.8);
+      border-radius: 50%;
+      bottom: -30px;
+      left: -20px;
+      z-index: -1;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.8rem;
-      padding: 4px 10px;
+      font-size: 0.78rem;
+      padding: 4px 12px;
       border-radius: 999px;
       background: var(--primary-soft);
       color: var(--text-soft);
       margin-bottom: 8px;
+      border: 1px dashed #ffb6d9;
+    }
+
+    .hero-badge::before {
+      content: "⭐";
     }
 
     .hero-title {
-      font-size: 1.7rem;
+      font-size: 1.9rem;
       margin: 0 0 8px 0;
     }
 
@@ -235,21 +290,22 @@ body.large-text * {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .tag {
-      font-size: 0.75rem;
-      padding: 4px 8px;
+      font-size: 0.78rem;
+      padding: 4px 9px;
       border-radius: 999px;
-      background: var(--primary-soft);
+      background: #fff5fc;
       color: var(--text-soft);
+      border: 1px dashed var(--border-soft);
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
     }
 
     .primary-btn {
@@ -257,50 +313,76 @@ body.large-text * {
       background: var(--primary);
       color: #fff;
       border-radius: 999px;
-      padding: 8px 16px;
+      padding: 9px 18px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 4px 0 rgba(199, 77, 132, 0.85);
       font-size: 0.95rem;
+      transition: transform 0.1s, box-shadow 0.1s, filter 0.15s;
     }
 
     .primary-btn:hover {
       filter: brightness(1.05);
       transform: translateY(-1px);
+      box-shadow: 0 6px 0 rgba(199, 77, 132, 0.85);
     }
 
     .secondary-btn {
       border-radius: 999px;
-      border: 1px solid var(--border-soft);
+      border: 2px dashed var(--border-soft);
       background: #fff;
-      padding: 8px 14px;
+      padding: 8px 16px;
       font-size: 0.9rem;
       cursor: pointer;
     }
 
     .hero-visual {
-  position: relative;
-  height: 100%;
-  min-height: 220px;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  background: #000000; /* сурет астындағы фон, қалауыңызша */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0; /* суретті толық шығару үшін */
-}
+      position: relative;
+      height: 100%;
+      min-height: 240px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: linear-gradient(145deg, #b3e5fc, #ffe0f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
 
-.hero-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;       /* суретті әдемі қиып, блокты толық толтырады */
-  display: block;
-}
+    .hero-visual::before {
+      content: "🐑 📚 🌈";
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      font-size: 1.4rem;
+      opacity: 0.9;
+    }
 
+    .hero-visual::after {
+      content: "Қош келдің! 💬";
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      border: 1px dashed #ffb6d9;
+    }
+
+    .hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.1);
+      transform: scale(1.02);
+    }
+
+    /* ===== БӨЛІМДЕР ===== */
     .section {
-      margin-bottom: 26px;
+      margin-bottom: 28px;
     }
 
     .section-header {
@@ -311,16 +393,23 @@ body.large-text * {
       margin-bottom: 10px;
     }
 
+    @media (max-width: 700px) {
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
     .section-title {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       margin: 0;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .section-title span.icon {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
 
     .section-subtitle {
@@ -329,29 +418,45 @@ body.large-text * {
     }
 
     .pill {
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
-      background: var(--primary-soft);
+      background: var(--accent-soft);
       font-size: 0.8rem;
       color: var(--text-soft);
       white-space: nowrap;
+      border: 1px dashed #ffd166;
     }
 
     .section-body {
       background: var(--bg-alt);
       border-radius: var(--radius-big);
-      padding: 16px;
+      padding: 18px 16px;
       box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border-soft);
+      border: 3px solid #ffe3f0;
+      position: relative;
+    }
+
+    .section-body::before {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px dashed #ffe3f0;
+      top: -22px;
+      left: 22px;
+      background: #fffdfc;
+      opacity: 0.8;
+      z-index: -1;
     }
 
     .grid-2 {
       display: grid;
-      gap: 16px;
+      gap: 18px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .grid-2 {
         grid-template-columns: 1fr;
       }
@@ -359,13 +464,13 @@ body.large-text * {
 
     .concept-card {
       background: var(--primary-soft);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 12px;
-      border: 1px dashed var(--border-soft);
+      border: 2px dashed var(--border-soft);
     }
 
     .concept-title {
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 4px;
       font-size: 1rem;
     }
@@ -393,24 +498,25 @@ body.large-text * {
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 110px minmax(0, 1fr);
+      grid-template-columns: 120px minmax(0, 1fr);
       gap: 8px;
       align-items: start;
     }
 
     @media (max-width: 600px) {
       .timeline-item {
-        grid-template-columns: 80px minmax(0, 1fr);
+        grid-template-columns: 90px minmax(0, 1fr);
       }
     }
 
     .timeline-year {
-      background: var(--primary-soft);
+      background: #fff5fc;
       border-radius: 999px;
       padding: 4px 8px;
       text-align: center;
       font-weight: 600;
       font-size: 0.9rem;
+      border: 1px dashed var(--border-soft);
     }
 
     .timeline-text {
@@ -419,9 +525,17 @@ body.large-text * {
     }
 
     .task-group-title {
-      font-weight: 600;
+      font-weight: 700;
       margin-top: 10px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .task-group-title::before {
+      content: "✏️";
+      font-size: 1rem;
     }
 
     .tasks {
@@ -438,15 +552,25 @@ body.large-text * {
     }
 
     .task-card {
-      border-radius: 18px;
-      border: 1px dashed var(--border-soft);
-      background: #fafbff;
+      border-radius: 20px;
+      border: 2px dashed var(--border-soft);
+      background: #fff9fd;
       padding: 10px 12px;
       font-size: 0.95rem;
+      position: relative;
+    }
+
+    .task-card::after {
+      content: "★";
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      font-size: 0.9rem;
+      opacity: 0.4;
     }
 
     .task-title {
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 6px;
     }
 
@@ -464,7 +588,7 @@ body.large-text * {
     .option-btn {
       border-radius: 999px;
       border: 1px solid var(--border-soft);
-      background: #fff;
+      background: #ffffff;
       padding: 4px 10px;
       font-size: 0.9rem;
       cursor: pointer;
@@ -495,26 +619,67 @@ body.large-text * {
     }
 
     .quiz-btn {
-      margin-top: 6px;
-      border-radius: 10px;
-      border: 1px solid var(--border-soft);
+      margin-top: 8px;
+      border-radius: 14px;
+      border: 2px dashed var(--border-soft);
       background: #fff;
-      padding: 5px 10px;
+      padding: 6px 14px;
       font-size: 0.85rem;
       cursor: pointer;
     }
 
-    .label-soft {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-bottom: 4px;
-    }
+    /* "Дайын сөйлем" деген жазуды стикер сияқты қылайық */
+.label-soft {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff5fc;
+  border: 1px dashed var(--border-soft);
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+/* Сөздер тұрған блок */
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+  padding: 6px;
+  border-radius: 14px;
+  background: #fff5fc;
+  border: 1px dashed var(--border-soft);
+}
+
+/* Ішіндегі сөздер – мейлі button болсын, мейлі .word-item болсын */
+.word-bank button,
+.word-bank .word-item {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(255, 182, 193, 0.5);
+  transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
+}
+
+/* Ховер / фокус кезінде кішкене «көтеріліп» тұрсын */
+.word-bank button:hover,
+.word-bank button:focus-visible,
+.word-bank .word-item:hover,
+.word-bank .word-item:focus-visible {
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
 
     .local-history-box {
-      border-radius: 18px;
-      border: 2px dashed var(--border-soft);
-      padding: 10px 12px;
-      background: #fefefe;
+      border-radius: 22px;
+      border: 3px dashed var(--border-soft);
+      padding: 12px 12px 14px;
+      background: #fffefb;
     }
 
     .local-history-grid {
@@ -523,7 +688,7 @@ body.large-text * {
       gap: 12px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .local-history-grid {
         grid-template-columns: 1fr;
       }
@@ -532,11 +697,12 @@ body.large-text * {
     textarea {
       width: 100%;
       min-height: 120px;
-      border-radius: 12px;
-      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      border: 2px dashed var(--border-soft);
       padding: 8px;
       font-size: 0.95rem;
       resize: vertical;
+      background: #fffafb;
     }
 
     textarea:focus-visible {
@@ -548,9 +714,9 @@ body.large-text * {
       font-size: 0.85rem;
       color: var(--text-soft);
       padding: 6px 10px;
-      border-radius: 12px;
-      background: #e3f2fd;
-      border: 1px dashed var(--border-soft);
+      border-radius: 14px;
+      background: var(--accent-soft);
+      border: 1px dashed #ffd166;
       margin-top: 6px;
     }
 
@@ -558,15 +724,16 @@ body.large-text * {
       max-width: 1100px;
       margin: 0 auto;
       padding: 16px;
-      border-top: 1px solid var(--border-soft);
+      border-top: 2px dashed var(--border-soft);
       font-size: 0.85rem;
       color: var(--text-soft);
     }
 
-    .read-btn {
+    .read-btn,
+    .stop-btn {
       border-radius: 999px;
       border: 1px solid var(--border-soft);
-      background: #fff;
+      background: #fffdfd;
       padding: 4px 10px;
       font-size: 0.8rem;
       cursor: pointer;
@@ -577,15 +744,172 @@ body.large-text * {
       opacity: 0.4;
       cursor: not-allowed;
     }
-    .stop-btn {
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: #fff;
-      padding: 4px 10px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      margin-left: 6px;
-    }
+    /* ===== СӨЙЛЕУ / СӨЙЛЕМ ҚҰРАСТЫРУ БЛОКТАРЫ ===== */
+
+.speech-block {
+  border-radius: 20px;
+  border: 2px dashed var(--border-soft);
+  background: #fff9fd;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(255, 182, 193, 0.25);
+}
+
+.speech-block .task-title {
+  margin-bottom: 4px;
+}
+
+.speech-block .task-text {
+  margin-bottom: 8px;
+}
+
+/* Сөздер тұрған «банкі» */
+.word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+  padding: 6px;
+  border-radius: 14px;
+  background: #fff5fc;
+  border: 1px dashed var(--border-soft);
+}
+
+/* Егер JS .word-item деген элементтер жасаса – стилі */
+.word-bank .word-item {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
+  box-shadow: 0 2px 0 rgba(255, 182, 193, 0.5);
+}
+
+.word-bank .word-item:hover {
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
+/* Құрылған сөйлем шығатын жер */
+.sentence-output {
+  min-height: 40px;
+  margin-top: 6px;
+  padding: 6px 8px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px dashed var(--border-soft);
+  font-size: 1rem;
+}
+
+/* Басқару батырмалары (Тексеру / Тазарту / Дауыстап оқу) */
+.sentence-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sentence-btn {
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #ffffff;
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(255, 182, 193, 0.6);
+  transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
+}
+
+.sentence-btn:hover,
+.sentence-btn:focus-visible {
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+}
+
+/* Тыңда және қайталау – фраза батырмалары */
+.phrase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.phrase-btn {
+  width: 100%;
+  border-radius: 18px;
+  border: 2px solid var(--border-soft);
+  background: #ffffff;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  box-shadow: 0 3px 0 rgba(255, 182, 193, 0.5);
+  transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
+}
+
+.phrase-btn:hover,
+.phrase-btn:focus-visible {
+  background: #fff5fc;
+  transform: translateY(-1px);
+}
+
+.phrase-btn .icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+/* Кішкентай смайликтер қатары */
+.mini-smiley-row {
+  margin-top: 10px;
+  font-size: 1.3rem;
+  display: flex;
+  gap: 4px;
+}
+/* Салыстыру жаттығуы үшін тор */
+.compare-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Әр сөйлем жолы */
+.compare-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  gap: 8px;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 14px;
+  background: #fff5fc;
+  border: 1px dashed var(--border-soft);
+}
+
+@media (max-width: 700px) {
+  .compare-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.compare-text {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Осы жаттығудағы кнопкалар – бұрынғы .option-btn стилін қолданады,
+   сондықтан бөлек ештеңе жасаудың қажеті жоқ */
+
   </style>
 </head>
 <body>
@@ -602,7 +926,12 @@ body.large-text * {
       </div>
 
       <div style="display: flex; flex-direction: column; align-items: flex-end;">
-       
+        <nav aria-label="Бөлімдер">
+          <button class="nav-btn" data-target="kезеңдер">Кезеңдер</button>
+          <button class="nav-btn" data-target="ww2">1941–1945</button>
+          <button class="nav-btn" data-target="speech">Сөйлеуді дамыту</button>
+          <button class="nav-btn" data-target="independence">Тәуелсіздік</button>
+        </nav>
         <div class="tools" aria-label="Қосымша құралдар">
           <button class="tool-btn" id="fontToggle">Қаріпті үлкейту</button>
         </div>
@@ -628,6 +957,7 @@ body.large-text * {
           <span class="tag">Үлкен қаріп</span>
           <span class="tag">Қысқа бөлімдер</span>
           <span class="tag">Өзін-өзі тексеру тапсырмалары</span>
+          <span class="tag">Сөйлеуді дамыту</span>
         </div>
         <div class="hero-actions">
           <button class="primary-btn" data-target="kезеңдер">
@@ -636,16 +966,21 @@ body.large-text * {
           <button class="secondary-btn" data-target="ww2">
             1941–1945 жж. тақырыбына өту
           </button>
+          <button class="secondary-btn" data-target="speech">
+            Сөйлеуді дамыту жаттығулары
+          </button>
         </div>
       </div>
+      
+      
 
-      <div class="hero-visual">
+      <div class="hero-visual" aria-hidden="true">
         <img
           src="https://massaget.kz/userdata/news/news_38457/image_l.jpg"
-          alt="Қазақстанның табиғаты мен тарихи ескерткіштері"
+          alt=""
           class="hero-photo"
         />
-      </div>      
+      </div>
     </section>
 
     <!-- 1. КЕЗЕҢДЕР -->
@@ -663,7 +998,7 @@ body.large-text * {
         </h2>
         <div class="pill">9-сыныпқа арналған қысқаша шолу</div>
       </div>
-    
+
       <div class="section-body" id="kезеңдер-text">
         <div class="grid-2">
           <!-- Сол жақ түсіндірме бөлігі -->
@@ -672,7 +1007,7 @@ body.large-text * {
               9-сыныпта біз Қазақстан тарихын үлкен үш кезеңге бөліп оқимыз.
               Бұл – оқиғаларды ретімен түсінуге көмектесетін ыңғайлы тәсіл.
             </p>
-    
+
             <ul class="simple-list">
               <li>
                 <strong>Ежелгі Қазақстан</strong> – шамамен алғашқы қауымдық құрылыс
@@ -691,7 +1026,7 @@ body.large-text * {
                 соғысы, соғыстан кейінгі даму және тәуелсіз Қазақстан қарастырылады.
               </li>
             </ul>
-    
+
             <div class="concept-card">
               <div class="concept-title">Есте сақтаңыз</div>
               <div class="concept-content">
@@ -701,7 +1036,7 @@ body.large-text * {
                 қандай қиындықтар мен жетістіктер болды – осының бәрін қарастырамыз.
               </div>
             </div>
-    
+
             <p style="margin-top: 10px;">
               Кезеңдерге бөлу бізге:
             </p>
@@ -711,7 +1046,7 @@ body.large-text * {
               <li>«қашан болды?» деген сұраққа тез жауап беруге көмектеседі.</li>
             </ul>
           </div>
-    
+
           <!-- Оң жақтағы тапсырмалар бөлігі -->
           <div>
             <div class="task-group-title">Жылдам тапсырмалар</div>
@@ -729,7 +1064,7 @@ body.large-text * {
                 </div>
                 <div class="task-feedback"></div>
               </div>
-    
+
               <!-- 2-тапсырма -->
               <div class="task-card" data-quiz>
                 <div class="task-title">2-тапсырма</div>
@@ -743,7 +1078,7 @@ body.large-text * {
                 </div>
                 <div class="task-feedback"></div>
               </div>
-    
+
               <!-- 3-тапсырма -->
               <div class="task-card" data-quiz>
                 <div class="task-title">3-тапсырма</div>
@@ -757,7 +1092,7 @@ body.large-text * {
                 </div>
                 <div class="task-feedback"></div>
               </div>
-    
+
               <!-- 4-тапсырма -->
               <div class="task-card" data-quiz>
                 <div class="task-title">4-тапсырма</div>
@@ -777,7 +1112,7 @@ body.large-text * {
                 </div>
                 <div class="task-feedback"></div>
               </div>
-    
+
               <!-- 5-тапсырма -->
               <div class="task-card" data-quiz>
                 <div class="task-title">5-тапсырма</div>
@@ -792,7 +1127,7 @@ body.large-text * {
                 <div class="task-feedback"></div>
               </div>
             </div>
-    
+
             <button class="quiz-btn" data-reset="#kезеңдер">
               Таңдауды тазарту
             </button>
@@ -800,717 +1135,882 @@ body.large-text * {
         </div>
       </div>
     </section>
-    
 
-   <!-- 2. ҰЛЫ ОТАН СОҒЫСЫ -->
-<section class="section" id="ww2">
-  <div class="section-header">
-    <h2 class="section-title">
-      <span class="icon" aria-hidden="true">🕊️</span>
-      Қазақстан Ұлы Отан соғысы жылдарында (1941–1945 жылдар)
-      <button class="read-btn" data-read="#ww2-text">
-        Мәтінді дауыстап оқу
-      </button>
-      <button class="stop-btn">
-        Оқуды тоқтату
-      </button>
-    </h2>
-    <div class="section-subtitle">
-      Республика өмірінің соғыс жағдайына ауысуы, қазақстандықтардың майдандағы және тылдағы ерлігі.
-    </div>
-  </div>
+    <!-- 2. ҰЛЫ ОТАН СОҒЫСЫ -->
+    <section class="section" id="ww2">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon" aria-hidden="true">🕊️</span>
+          Қазақстан Ұлы Отан соғысы жылдарында (1941–1945 жылдар)
+          <button class="read-btn" data-read="#ww2-text">
+            Мәтінді дауыстап оқу
+          </button>
+          <button class="stop-btn">
+            Оқуды тоқтату
+          </button>
+        </h2>
+        <div class="section-subtitle">
+          Республика өмірінің соғыс жағдайына ауысуы, қазақстандықтардың майдандағы және тылдағы ерлігі.
+        </div>
+      </div>
 
-  <div class="section-body" id="ww2-text">
-    <div class="grid-2">
-      <!-- Сол жақ: түсіндірме бөлігі -->
-      <div>
-        <div class="concept-card">
-          <div class="concept-title">Негізгі түсініктер</div>
-          <div class="concept-content">
+      <div class="section-body" id="ww2-text">
+        <div class="grid-2">
+          <!-- Сол жақ: түсіндірме бөлігі -->
+          <div>
+            <div class="concept-card">
+              <div class="concept-title">Негізгі түсініктер</div>
+              <div class="concept-content">
+                <p>
+                  Ұлы Отан соғысы – 1941–1945 жылдар аралығында болған, КСРО мен
+                  фашистік Германия арасындағы өте ауыр соғыс. Бұл соғысқа бүкіл
+                  ел сияқты Қазақстан да қатысып, Жеңіске үлкен үлес қосты.
+                </p>
+                <ul class="simple-list">
+                  <li>
+                    <strong>Ұлы Отан соғысы</strong> – КСРО аумағын қорғау үшін
+                    жүргізілген соғыс (1941–1945 жылдар). Бұл соғысқа миллиондаған
+                    адамдар қатысып, көп адам қаза тапты.
+                  </li>
+                  <li>
+                    <strong>Майдан</strong> – соғыс болып жатқан алғы шеп.
+                    Яғни, әскерлер тікелей шайқасатын жер.
+                  </li>
+                  <li>
+                    <strong>Тыл</strong> – соғыс болып жатқан жерден алыс аймақ,
+                    бірақ ол жерде де халық күндіз-түні еңбек етіп, майданға
+                    азық-түлік, киім, қару-жарақ жіберіп көмектесті.
+                  </li>
+                  <li>
+                    <strong>Арсенал</strong> – қару-жарақ пен оқ-дәрі сақталатын,
+                    жасалатын және жөнделетін арнайы орын.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="task-group-title">Қазақстан соғыс жылдарында</div>
             <p>
-              Ұлы Отан соғысы – 1941–1945 жылдар аралығында болған, КСРО мен
-              фашистік Германия арасындағы өте ауыр соғыс. Бұл соғысқа бүкіл
-              ел сияқты Қазақстан да қатысып, Жеңіске үлкен үлес қосты.
+              Соғыс басталған кезде Қазақстандағы зауыттар мен фабрикалар
+              қару-жарақ, оқ-дәрі, әскери техника, әскери киімдер шығарды.
+              Егістікте жүрген адамдар майданға астық, ет, сүт жіберіп отырды.
+              Әйелдер, қарттар, жасөспірімдер де тылда көп еңбек етті.
+            </p>
+            <p>
+              Көптеген қазақстандықтар майданға өз еркімен кетті, батырлық көрсетті.
+              Олардың арасында аты аңызға айналған Бауыржан Момышұлы,
+              Әлия Молдағұлова, Мәншүк Мәметова сияқты қаһармандар бар.
+            </p>
+
+            <div class="task-group-title">Уақыт сызығы</div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">1941 жыл</div>
+                <div class="timeline-text">
+                  Германия КСРО-ға тұтқиылдан шабуыл жасады. Қазақстанда әскери
+                  жағдай енгізілді, ер азаматтар әскерге шақырылып, майданға
+                  аттана бастады.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">1941–1945 жылдар</div>
+                <div class="timeline-text">
+                  Қазақстанда көптеген зауыттар мен фабрикалар үздіксіз жұмыс істеді.
+                  Мұнда қару-жарақ, оқ-дәрі, танк, ұшақ бөлшектері, сондай-ақ
+                  әскери киім мен азық-түлік өндірілді. Тылдағы еңбек – Жеңістің
+                  маңызды негізі болды.
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">1945 жыл</div>
+                <div class="timeline-text">
+                  Соғыс аяқталды, фашистік Германия жеңілді. Қазақстандық жауынгерлер
+                  мен тыл еңбеккерлері Жеңіске үлкен үлес қосты, көптеген қазақ
+                  жауынгерлері орден-медальдармен марапатталды.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Оң жақ: тапсырмалар бөлігі -->
+          <div>
+            <div class="task-group-title">Тапсырмалар</div>
+            <div class="tasks">
+              <!-- 1-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">1-тапсырма (дұрыс жауабын таңда)</div>
+                <div class="task-text">
+                  Ұлы Отан соғысы қай жылдар аралығында болды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">1914–1918 жылдар</button>
+                  <button class="option-btn" data-correct="true">1941–1945 жылдар</button>
+                  <button class="option-btn" data-correct="false">1991–1995 жылдар</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 2-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">2-тапсырма (сәйкестендір)</div>
+                <div class="task-text">
+                  «Майдан» сөзінің дұрыс мағынасын таңда.
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Соғыс болып жатқан алғы шеп</button>
+                  <button class="option-btn" data-correct="false">Ауыл шаруашылығы</button>
+                  <button class="option-btn" data-correct="false">Мектеп</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 3-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">3-тапсырма (мағынасын тап)</div>
+                <div class="task-text">
+                  «Тыл» дегеніміз не?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Әскер тұрған шеп</button>
+                  <button class="option-btn" data-correct="true">
+                    Соғыс аймағынан алыс, бірақ майданға азық-түлік, қару-жарақ жіберіп көмектесетін аймақ
+                  </button>
+                  <button class="option-btn" data-correct="false">Қаладағы демалыс орны</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 4-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">4-тапсырма (дұрыс жауапты белгіле)</div>
+                <div class="task-text">
+                  Қазақстан халқы соғыс жылдарында майданға қалай көмек көрсетті?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">
+                    Зауыттарда қару-жарақ пен оқ-дәрі шығарып, егістікте азық-түлік өндіріп жіберді
+                  </button>
+                  <button class="option-btn" data-correct="false">Соғысты теледидардан ғана қарап отырды</button>
+                  <button class="option-btn" data-correct="false">Майданға мүлде көмектеспеді</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 5-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">5-тапсырма (ұғымды таңда)</div>
+                <div class="task-text">
+                  Қару-жарақ пен оқ-дәрі сақталатын және жасалатын арнайы орын қалай аталады?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Егістік</button>
+                  <button class="option-btn" data-correct="false">Мектеп</button>
+                  <button class="option-btn" data-correct="true">Арсенал</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+            </div>
+
+            <button class="quiz-btn" data-reset="#ww2">
+              Таңдауды тазарту
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. СОҒЫСТАН КЕЙІНГІ ҚАЗАҚСТАН -->
+    <section class="section" id="postwar">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon" aria-hidden="true">🏭</span>
+          Соғыстан кейінгі Қазақстан (1946–1980 жылдар)
+          <button class="read-btn" data-read="#postwar-text">Мәтінді дауыстап оқу</button>
+          <button class="stop-btn">Оқуды тоқтату</button>
+        </h2>
+        <div class="section-subtitle">
+          Қоғамдық-саяси өмір, өнеркәсіп, тың игеру, «Байқоңыр» ғарыш айлағы.
+        </div>
+      </div>
+
+      <div class="section-body" id="postwar-text">
+        <div class="grid-2">
+          <!-- Сол жақ: толық түсіндірме -->
+          <div>
+            <p>
+              1945 жылы Ұлы Отан соғысы аяқталғаннан кейін Қазақстанда үлкен экономикалық,
+              әлеуметтік және саяси өзгерістер басталды. Елде соғыстан қажыған халықты
+              қалпына келтіру, зауыт-фабрикаларды жөндеу, ауыл шаруашылығын көтеру сияқты
+              маңызды міндеттер тұрды.
+            </p>
+
+            <h3>Өнеркәсіптің қалпына келтірілуі</h3>
+            <p>
+              Соғыс кезінде көптеген зауыттар тоқтап қалған еді. 1946 жылдан бастап
+              Қазақстанда өнеркәсіп қарқынды түрде жаңартылды:
             </p>
             <ul class="simple-list">
-              <li>
-                <strong>Ұлы Отан соғысы</strong> – КСРО аумағын қорғау үшін
-                жүргізілген соғыс (1941–1945 жылдар). Бұл соғысқа миллиондаған
-                адамдар қатысып, көп адам қаза тапты.
-              </li>
-              <li>
-                <strong>Майдан</strong> – соғыс болып жатқан алғы шеп.
-                Яғни, әскерлер тікелей шайқасатын жер.
-              </li>
-              <li>
-                <strong>Тыл</strong> – соғыс болып жатқан жерден алыс аймақ,
-                бірақ ол жерде де халық күндіз-түні еңбек етіп, майданға
-                азық-түлік, киім, қару-жарақ жіберіп көмектесті.
-              </li>
-              <li>
-                <strong>Арсенал</strong> – қару-жарақ пен оқ-дәрі сақталатын,
-                жасалатын және жөнделетін арнайы орын.
-              </li>
+              <li>металлургия, химия, мұнай өнеркәсібі дамыды;</li>
+              <li>жаңа зауыттар салынды, ескі кәсіпорындар қайта жөнделді;</li>
+              <li>шахталарда көмір өндірісі көбейді.</li>
             </ul>
-          </div>
-        </div>
 
-        <div class="task-group-title">Қазақстан соғыс жылдарында</div>
-        <p>
-          Соғыс басталған кезде Қазақстандағы зауыттар мен фабрикалар
-          қару-жарақ, оқ-дәрі, әскери техника, әскери киімдер шығарды.
-          Егістікте жүрген адамдар майданға астық, ет, сүт жіберіп отырды.
-          Әйелдер, қарттар, жасөспірімдер де тылда көп еңбек етті.
-        </p>
-        <p>
-          Көптеген қазақстандықтар майданға өз еркімен кетті, батырлық көрсетті.
-          Олардың арасында аты аңызға айналған Бауыржан Момышұлы,
-          Әлия Молдағұлова, Мәншүк Мәметова сияқты қаһармандар бар.
-        </p>
+            <h3>Тың игеру (1954 жыл)</h3>
+            <p>
+              1954 жылы Қазақстанда тың және тыңайған жерлерді игеру науқаны басталды.
+              Тың игерудің мақсаты – астық өндірісін көбейту. Мыңдаған адамдар еліміздің
+              солтүстік өңірлеріне көшіп келіп, жаңа елді мекендер құрды.
+            </p>
 
-        <div class="task-group-title">Уақыт сызығы</div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-year">1941 жыл</div>
-            <div class="timeline-text">
-              Германия КСРО-ға тұтқиылдан шабуыл жасады. Қазақстанда әскери
-              жағдай енгізілді, ер азаматтар әскерге шақырылып, майданға
-              аттана бастады.
+            <ul class="simple-list">
+              <li><strong>Тың игеру</strong> – бұрын жыртылмаған жаңа жерлерді егіншілікке пайдалану.</li>
+              <li>Қазақстан бірден КСРО-дағы негізгі астық өндірушілердің біріне айналды.</li>
+            </ul>
+
+            <h3>«Байқоңыр» ғарыш айлағы</h3>
+            <p>
+              1955 жылы Қызылорда облысындағы Байқоңырда әлемдегі алғаш және ең ірі
+              ғарыш айлағының құрылысы басталды. Бұл жерден 1961 жылы Юрий Гагарин
+              ғарышқа алғаш рет ұшты. Байқоңыр Қазақстанның ғылым мен техника тарихында
+              ерекше орын алады.
+            </p>
+
+            <ul class="simple-list">
+              <li><strong>Ғарыш айлағы</strong> – зымырандар ұшырылатын арнайы кешен.</li>
+            </ul>
+
+            <h3>Урбанизация – қалалардың өсуі</h3>
+            <p>
+              1960–1980 жылдары Қазақстанда қала халқы көбейді. Ауылдағы адамдар жұмыс,
+              білім және жаңа мүмкіндіктер іздеп қалаға қоныс аудара бастады.
+            </p>
+
+            <div class="concept-card">
+              <div class="concept-title">Маңызды ұғымдар</div>
+              <div class="concept-content">
+                <strong>Урбанизация</strong> – халықтың қалаға көшуі және қалалардың өсуі.<br>
+                <strong>Өнеркәсіп</strong> – зауыттар мен фабрикалар шығаратын өнімдер саласы.<br>
+                <strong>Ғарыш айлағы</strong> – зымырандар мен ғарыш аппараттары ұшырылатын орын.<br>
+                <strong>Тың игеру</strong> – жаңа жерлерді егістіке жыртып дайындау.
+              </div>
             </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-year">1941–1945 жылдар</div>
-            <div class="timeline-text">
-              Қазақстанда көптеген зауыттар мен фабрикалар үздіксіз жұмыс істеді.
-              Мұнда қару-жарақ, оқ-дәрі, танк, ұшақ бөлшектері, сондай-ақ
-              әскери киім мен азық-түлік өндірілді. Тылдағы еңбек – Жеңістің
-              маңызды негізі болды.
+
+          <!-- Оң жақ: 5 тапсырма -->
+          <div>
+            <div class="task-group-title">Тапсырмалар</div>
+            <div class="tasks">
+
+              <!-- 1-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">1-тапсырма</div>
+                <div class="task-text">
+                  «Тың игеру» дегеніміз не?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Астық өсіру үшін жаңа жерлерді жырту</button>
+                  <button class="option-btn" data-correct="false">Жаңа мектеп салу</button>
+                  <button class="option-btn" data-correct="false">Өзенге көпір салу</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 2-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">2-тапсырма</div>
+                <div class="task-text">Қазақстанда орналасқан ғарыш айлағын таңда.</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Кеннеди</button>
+                  <button class="option-btn" data-correct="true">Байқоңыр</button>
+                  <button class="option-btn" data-correct="false">Восточный</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 3-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">3-тапсырма</div>
+                <div class="task-text">Урбанизация дегеніміз не?</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Адамдардың ауылға қайта көшуі</button>
+                  <button class="option-btn" data-correct="true">Қала халқының көбеюі және қалаға көшу процесі</button>
+                  <button class="option-btn" data-correct="false">Жаңбырлы ауа райы</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 4-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">4-тапсырма</div>
+                <div class="task-text">
+                  Байқоңырдан 1961 жылы қандай маңызды оқиға болды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Бірінші метро іске қосылды</button>
+                  <button class="option-btn" data-correct="true">Юрий Гагарин ғарышқа бірінші болып ұшты</button>
+                  <button class="option-btn" data-correct="false">Тың игеру басталды</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 5-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">5-тапсырма</div>
+                <div class="task-text">
+                  Соғыстан кейін Қазақстан өнеркәсібінде қандай өзгерістер болды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Зауыттар қайта қалпына келтірілді, жаңа өндірістер ашылды</button>
+                  <button class="option-btn" data-correct="false">Өнеркәсіп толық тоқтап қалды</button>
+                  <button class="option-btn" data-correct="false">Барлық адамдар ауылға көшірілді</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
             </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-year">1945 жыл</div>
-            <div class="timeline-text">
-              Соғыс аяқталды, фашистік Германия жеңілді. Қазақстандық жауынгерлер
-              мен тыл еңбеккерлері Жеңіске үлкен үлес қосты, көптеген қазақ
-              жауынгерлері орден-медальдармен марапатталды.
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Оң жақ: тапсырмалар бөлігі -->
-      <div>
-        <div class="task-group-title">Тапсырмалар</div>
-        <div class="tasks">
-          <!-- 1-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">1-тапсырма (дұрыс жауабын таңда)</div>
-            <div class="task-text">
-              Ұлы Отан соғысы қай жылдар аралығында болды?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">1914–1918 жылдар</button>
-              <button class="option-btn" data-correct="true">1941–1945 жылдар</button>
-              <button class="option-btn" data-correct="false">1991–1995 жылдар</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 2-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">2-тапсырма (сәйкестендір)</div>
-            <div class="task-text">
-              «Майдан» сөзінің дұрыс мағынасын таңда.
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">Соғыс болып жатқан алғы шеп</button>
-              <button class="option-btn" data-correct="false">Ауыл шаруашылығы</button>
-              <button class="option-btn" data-correct="false">Мектеп</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 3-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">3-тапсырма (мағынасын тап)</div>
-            <div class="task-text">
-              «Тыл» дегеніміз не?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">Әскер тұрған шеп</button>
-              <button class="option-btn" data-correct="true">
-                Соғыс аймағынан алыс, бірақ майданға азық-түлік, қару-жарақ жіберіп көмектесетін аймақ
-              </button>
-              <button class="option-btn" data-correct="false">Қаладағы демалыс орны</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 4-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">4-тапсырма (дұрыс жауапты белгіле)</div>
-            <div class="task-text">
-              Қазақстан халқы соғыс жылдарында майданға қалай көмек көрсетті?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">
-                Зауыттарда қару-жарақ пен оқ-дәрі шығарып, егістікте азық-түлік өндіріп жіберді
-              </button>
-              <button class="option-btn" data-correct="false">Соғысты теледидардан ғана қарап отырды</button>
-              <button class="option-btn" data-correct="false">Майданға мүлде көмектеспеді</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 5-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">5-тапсырма (ұғымды таңда)</div>
-            <div class="task-text">
-              Қару-жарақ пен оқ-дәрі сақталатын және жасалатын арнайы орын қалай аталады?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">Егістік</button>
-              <button class="option-btn" data-correct="false">Мектеп</button>
-              <button class="option-btn" data-correct="true">Арсенал</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-        </div>
-
-        <button class="quiz-btn" data-reset="#ww2">
-          Таңдауды тазарту
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-    <!-- 3. СОҒЫСТАН КЕЙІНГІ ҚАЗАҚСТАН -->
-    <!-- 3. СОҒЫСТАН КЕЙІНГІ ҚАЗАҚСТАН -->
-<section class="section" id="postwar">
-  <div class="section-header">
-    <h2 class="section-title">
-      <span class="icon" aria-hidden="true">🏭</span>
-      Соғыстан кейінгі Қазақстан (1946–1980 жылдар)
-      <button class="read-btn" data-read="#postwar-text">Мәтінді дауыстап оқу</button>
-      <button class="stop-btn">Оқуды тоқтату</button>
-    </h2>
-    <div class="section-subtitle">
-      Қоғамдық-саяси өмір, өнеркәсіп, тың игеру, «Байқоңыр» ғарыш айлағы.
-    </div>
-  </div>
-
-  <div class="section-body" id="postwar-text">
-    <div class="grid-2">
-      <!-- Сол жақ: толық түсіндірме -->
-      <div>
-        <p>
-          1945 жылы Ұлы Отан соғысы аяқталғаннан кейін Қазақстанда үлкен экономикалық,
-          әлеуметтік және саяси өзгерістер басталды. Елде соғыстан қажыған халықты
-          қалпына келтіру, зауыт-фабрикаларды жөндеу, ауыл шаруашылығын көтеру сияқты
-          маңызды міндеттер тұрды.
-        </p>
-
-        <h3>Өнеркәсіптің қалпына келтірілуі</h3>
-        <p>
-          Соғыс кезінде көптеген зауыттар тоқтап қалған еді. 1946 жылдан бастап
-          Қазақстанда өнеркәсіп қарқынды түрде жаңартылды:
-        </p>
-        <ul class="simple-list">
-          <li>металлургия, химия, мұнай өнеркәсібі дамыды;</li>
-          <li>жаңа зауыттар салынды, ескі кәсіпорындар қайта жөнделді;</li>
-          <li>шахталарда көмір өндірісі көбейді.</li>
-        </ul>
-
-        <h3>Тың игеру (1954 жыл)</h3>
-        <p>
-          1954 жылы Қазақстанда тың және тыңайған жерлерді игеру науқаны басталды.
-          Тың игерудің мақсаты – астық өндірісін көбейту. Мыңдаған адамдар еліміздің
-          солтүстік өңірлеріне көшіп келіп, жаңа елді мекендер құрды.
-        </p>
-
-        <ul class="simple-list">
-          <li><strong>Тың игеру</strong> – бұрын жыртылмаған жаңа жерлерді егіншілікке пайдалану.</li>
-          <li>Қазақстан бірден КСРО-дағы негізгі астық өндірушілердің біріне айналды.</li>
-        </ul>
-
-        <h3>«Байқоңыр» ғарыш айлағы</h3>
-        <p>
-          1955 жылы Қызылорда облысындағы Байқоңырда әлемдегі алғаш және ең ірі
-          ғарыш айлағының құрылысы басталды. Бұл жерден 1961 жылы Юрий Гагарин
-          ғарышқа алғаш рет ұшты. Байқоңыр Қазақстанның ғылым мен техника тарихында
-          ерекше орын алады.
-        </p>
-
-        <ul class="simple-list">
-          <li><strong>Ғарыш айлағы</strong> – зымырандар ұшырылатын арнайы кешен.</li>
-        </ul>
-
-        <h3>Урбанизация – қалалардың өсуі</h3>
-        <p>
-          1960–1980 жылдары Қазақстанда қала халқы көбейді. Ауылдағы адамдар жұмыс,
-          білім және жаңа мүмкіндіктер іздеп қалаға қоныс аудара бастады.
-        </p>
-
-        <div class="concept-card">
-          <div class="concept-title">Маңызды ұғымдар</div>
-          <div class="concept-content">
-            <strong>Урбанизация</strong> – халықтың қалаға көшуі және қалалардың өсуі.<br>
-            <strong>Өнеркәсіп</strong> – зауыттар мен фабрикалар шығаратын өнімдер саласы.<br>
-            <strong>Ғарыш айлағы</strong> – зымырандар мен ғарыш аппараттары ұшырылатын орын.<br>
-            <strong>Тың игеру</strong> – жаңа жерлерді егістіке жыртып дайындау.
+            <button class="quiz-btn" data-reset="#postwar">Таңдауды тазарту</button>
           </div>
         </div>
       </div>
-
-      <!-- Оң жақ: 5 тапсырма -->
-      <div>
-        <div class="task-group-title">Тапсырмалар</div>
-        <div class="tasks">
-
-          <!-- 1-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">1-тапсырма</div>
-            <div class="task-text">
-              «Тың игеру» дегеніміз не?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">Астық өсіру үшін жаңа жерлерді жырту</button>
-              <button class="option-btn" data-correct="false">Жаңа мектеп салу</button>
-              <button class="option-btn" data-correct="false">Өзенге көпір салу</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 2-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">2-тапсырма</div>
-            <div class="task-text">Қазақстанда орналасқан ғарыш айлағын таңда.</div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">Кеннеди</button>
-              <button class="option-btn" data-correct="true">Байқоңыр</button>
-              <button class="option-btn" data-correct="false">Восточный</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 3-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">3-тапсырма</div>
-            <div class="task-text">Урбанизация дегеніміз не?</div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">Адамдардың ауылға қайта көшуі</button>
-              <button class="option-btn" data-correct="true">Қала халқының көбеюі және қалаға көшу процесі</button>
-              <button class="option-btn" data-correct="false">Жаңбырлы ауа райы</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 4-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">4-тапсырма</div>
-            <div class="task-text">
-              Байқоңырдан 1961 жылы қандай маңызды оқиға болды?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">Бірінші метро іске қосылды</button>
-              <button class="option-btn" data-correct="true">Юрий Гагарин ғарышқа бірінші болып ұшты</button>
-              <button class="option-btn" data-correct="false">Тың игеру басталды</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-          <!-- 5-тапсырма -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">5-тапсырма</div>
-            <div class="task-text">
-              Соғыстан кейін Қазақстан өнеркәсібінде қандай өзгерістер болды?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">Зауыттар қайта қалпына келтірілді, жаңа өндірістер ашылды</button>
-              <button class="option-btn" data-correct="false">Өнеркәсіп толық тоқтап қалды</button>
-              <button class="option-btn" data-correct="false">Барлық адамдар ауылға көшірілді</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
-
-        </div>
-
-        <button class="quiz-btn" data-reset="#postwar">Таңдауды тазарту</button>
-      </div>
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <!-- 4. «ҚАЙТА ҚҰРУ» КЕЗЕҢІ -->
-    <!-- 4. «Қайта құру» кезеңіндегі Қазақстан -->
-<section class="section" id="perestroika">
-  <div class="section-header">
-    <h2 class="section-title">
-      <span class="icon" aria-hidden="true">🔄</span>
-      «Қайта құру» кезеңіндегі Қазақстан (1980–1990 жылдар)
-      <button class="read-btn" data-read="#perestroika-text">Мәтінді дауыстап оқу</button>
-      <button class="stop-btn">Оқуды тоқтату</button>
-    </h2>
-    <div class="section-subtitle">
-      Қоғамдық-саяси өзгерістер, демократияландыру, 1986 жылғы Желтоқсан оқиғасы.
-    </div>
-  </div>
-
-  <div class="section-body" id="perestroika-text">
-    <div class="grid-2">
-
-      <!-- Сол жақ толық түсіндірме -->
-      <div>
-        <p>
-          1980–1990 жылдары КСРО-да үлкен өзгерістер кезеңі басталды. Бұл уақыт
-          «қайта құру» деп аталды. Бұл саясаттың негізгі мақсаты – қоғамды
-          жаңарту, әділдік орнату, экономика мен саясаттағы кемшіліктерді түзету,
-          ашықтыққа (гласность) қол жеткізу болды.
-        </p>
-
-        <h3>«Қайта құру» саясатының мәні</h3>
-        <p>
-          1985 жылы КСРО басшылығына Михаил Горбачев келіп, елде тоқырауды
-          жоюға бағытталған жаңа реформаларды бастады. Тоқырау – елдің
-          экономикасы баяулап, өнеркәсіптің дамымай, халық тұрмысының төмендеп
-          кетуі. Сол себепті көптеген өзгерістер қажет болды.
-        </p>
-
-        <ul class="simple-list">
-          <li><strong>Экономиканы жаңарту</strong> – зауыттар мен фабрикалардың өнімін көбейту, жаңа технология енгізу.</li>
-          <li><strong>Ашықтық</strong> – қоғамда пікір айту еркіндігін кеңейту, ақпаратты жасырып қалмау.</li>
-          <li><strong>Демократияландыру</strong> – адамдардың құқығын қорғау, әділдік орнату.</li>
-        </ul>
-
-        <h3>Қазақстандағы жағдай</h3>
-        <p>
-          Қазақстанда «қайта құру» жылдарында қоғамда әділдікке, ұлт мәселесіне,
-          тіл мен мәдениетке қатысты сұрақтар жиі көтеріле бастады. Халық өз
-          пікірін ашық айта бастады, жастар белсенділік танытты. Жұмысшылар,
-          студенттер, зиялы қауым елдегі әділетсіздікке қарсы пікірін білдірді.
-        </p>
-
-        <h3>1986 жылғы Желтоқсан оқиғасы</h3>
-        <p>
-          1986 жылы 16 желтоқсан күні Алматы қаласындағы Жастар алаңына мыңдаған
-          қазақ жастары жиналды. Олар әділетсіз шешімге қарсылық білдірді.
-          Қазақ халқын басқарып отырған басшы ауыстырылып, жергілікті халықтың
-          пікірі ескерілмеген еді. Жастар:
-        </p>
-        <ul class="simple-list">
-          <li>ұлттық намысты қорғауды;</li>
-          <li>әділ басшы тағайындауды;</li>
-          <li>қазақ халқының мүддесін ескеруді талап етті.</li>
-        </ul>
-
-        <p>
-          Бұл бейбіт шеруге күш қолданылды, көптеген жастар зардап шекті.
-          Дегенмен, Желтоқсан оқиғасы Қазақстан тарихында ерекше орын алады.
-          Ол кейіннен елдің тәуелсіздікке ұмтылуына үлкен әсер етті.
-        </p>
-
-        <div class="concept-card">
-          <div class="concept-title">Маңызды ұғымдар</div>
-          <div class="concept-content">
-            <strong>Қайта құру</strong> – қоғамды жаңарту, ашықтық пен демократияны күшейту саясаты (1985–1991 жылдар).<br>
-            <strong>Гласность</strong> – ашықтық, еркін пікір айтуға мүмкіндік беру.<br>
-            <strong>Тоқырау</strong> – экономиканың баяулауы, қиындықтардың көбейген кезеңі (1970–1980 жылдары).<br>
-            <strong>Желтоқсан оқиғасы</strong> – 1986 жылы қазақ жастарының әділдік талап еткен бейбіт шеруі.
-          </div>
+    <section class="section" id="perestroika">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon" aria-hidden="true">🔄</span>
+          «Қайта құру» кезеңіндегі Қазақстан (1980–1990 жылдар)
+          <button class="read-btn" data-read="#perestroika-text">Мәтінді дауыстап оқу</button>
+          <button class="stop-btn">Оқуды тоқтату</button>
+        </h2>
+        <div class="section-subtitle">
+          Қоғамдық-саяси өзгерістер, демократияландыру, 1986 жылғы Желтоқсан оқиғасы.
         </div>
       </div>
 
-      <!-- Оң жақ 5 тапсырма -->
-      <div>
-        <div class="task-group-title">Тапсырмалар</div>
-        <div class="tasks">
-          
-          <!-- 1 -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">1-тапсырма</div>
-            <div class="task-text">
-              «Қайта құру» саясатының басты мақсаты қандай болды?
+      <div class="section-body" id="perestroika-text">
+        <div class="grid-2">
+
+          <!-- Сол жақ толық түсіндірме -->
+          <div>
+            <p>
+              1980–1990 жылдары КСРО-да үлкен өзгерістер кезеңі басталды. Бұл уақыт
+              «қайта құру» деп аталды. Бұл саясаттың негізгі мақсаты – қоғамды
+              жаңарту, әділдік орнату, экономика мен саясаттағы кемшіліктерді түзету,
+              ашықтыққа (гласность) қол жеткізу болды.
+            </p>
+
+            <h3>«Қайта құру» саясатының мәні</h3>
+            <p>
+              1985 жылы КСРО басшылығына Михаил Горбачев келіп, елде тоқырауды
+              жоюға бағытталған жаңа реформаларды бастады. Тоқырау – елдің
+              экономикасы баяулап, өнеркәсіптің дамымай, халық тұрмысының төмендеп
+              кетуі. Сол себепті көптеген өзгерістер қажет болды.
+            </p>
+
+            <ul class="simple-list">
+              <li><strong>Экономиканы жаңарту</strong> – зауыттар мен фабрикалардың өнімін көбейту, жаңа технология енгізу.</li>
+              <li><strong>Ашықтық</strong> – қоғамда пікір айту еркіндігін кеңейту, ақпаратты жасырып қалмау.</li>
+              <li><strong>Демократияландыру</strong> – адамдардың құқығын қорғау, әділдік орнату.</li>
+            </ul>
+
+            <h3>Қазақстандағы жағдай</h3>
+            <p>
+              Қазақстанда «қайта құру» жылдарында қоғамда әділдікке, ұлт мәселесіне,
+              тіл мен мәдениетке қатысты сұрақтар жиі көтеріле бастады. Халық өз
+              пікірін ашық айта бастады, жастар белсенділік танытты. Жұмысшылар,
+              студенттер, зиялы қауым елдегі әділетсіздікке қарсы пікірін білдірді.
+            </p>
+
+            <h3>1986 жылғы Желтоқсан оқиғасы</h3>
+            <p>
+              1986 жылы 16 желтоқсан күні Алматы қаласындағы Жастар алаңына мыңдаған
+              қазақ жастары жиналды. Олар әділетсіз шешімге қарсылық білдірді.
+              Қазақ халқын басқарып отырған басшы ауыстырылып, жергілікті халықтың
+              пікірі ескерілмеген еді. Жастар:
+            </p>
+            <ul class="simple-list">
+              <li>ұлттық намысты қорғауды;</li>
+              <li>әділ басшы тағайындауды;</li>
+              <li>қазақ халқының мүддесін ескеруді талап етті.</li>
+            </ul>
+
+            <p>
+              Бұл бейбіт шеруге күш қолданылды, көптеген жастар зардап шекті.
+              Дегенмен, Желтоқсан оқиғасы Қазақстан тарихында ерекше орын алады.
+              Ол кейіннен елдің тәуелсіздікке ұмтылуына үлкен әсер етті.
+            </p>
+
+            <div class="concept-card">
+              <div class="concept-title">Маңызды ұғымдар</div>
+              <div class="concept-content">
+                <strong>Қайта құру</strong> – қоғамды жаңарту, ашықтық пен демократияны күшейту саясаты (1985–1991 жылдар).<br>
+                <strong>Гласность</strong> – ашықтық, еркін пікір айтуға мүмкіндік беру.<br>
+                <strong>Тоқырау</strong> – экономиканың баяулауы, қиындықтардың көбейген кезеңі (1970–1980 жылдары).<br>
+                <strong>Желтоқсан оқиғасы</strong> – 1986 жылы қазақ жастарының әділдік талап еткен бейбіт шеруі.
+              </div>
             </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">Қоғамды жаңарту, ашықтықты күшейту</button>
-              <button class="option-btn" data-correct="false">Соғысты бастау</button>
-              <button class="option-btn" data-correct="false">Барлық зауыттарды жабу</button>
-            </div>
-            <div class="task-feedback"></div>
           </div>
 
-          <!-- 2 -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">2-тапсырма</div>
-            <div class="task-text">Желтоқсан оқиғасы қай жыл болды?</div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">1986 жыл</button>
-              <button class="option-btn" data-correct="false">1991 жыл</button>
-              <button class="option-btn" data-correct="false">1954 жыл</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
+          <!-- Оң жақ 5 тапсырма -->
+          <div>
+            <div class="task-group-title">Тапсырмалар</div>
+            <div class="tasks">
+              
+              <!-- 1 -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">1-тапсырма</div>
+                <div class="task-text">
+                  «Қайта құру» саясатының басты мақсаты қандай болды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Қоғамды жаңарту, ашықтықты күшейту</button>
+                  <button class="option-btn" data-correct="false">Соғысты бастау</button>
+                  <button class="option-btn" data-correct="false">Барлық зауыттарды жабу</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
-          <!-- 3 -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">3-тапсырма</div>
-            <div class="task-text">Желтоқсан оқиғасы қай қалада өтті?</div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">Алматы</button>
-              <button class="option-btn" data-correct="false">Астана</button>
-              <button class="option-btn" data-correct="false">Шымкент</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
+              <!-- 2 -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">2-тапсырма</div>
+                <div class="task-text">Желтоқсан оқиғасы қай жыл болды?</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">1986 жыл</button>
+                  <button class="option-btn" data-correct="false">1991 жыл</button>
+                  <button class="option-btn" data-correct="false">1954 жыл</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
-          <!-- 4 -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">4-тапсырма</div>
-            <div class="task-text">
-              «Гласность» сөзінің мағынасы қандай?
-            </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="false">Қатаң бақылау</button>
-              <button class="option-btn" data-correct="true">Ашықтық, еркін пікір айту</button>
-              <button class="option-btn" data-correct="false">Салықты көбейту</button>
-            </div>
-            <div class="task-feedback"></div>
-          </div>
+              <!-- 3 -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">3-тапсырма</div>
+                <div class="task-text">Желтоқсан оқиғасы қай қалада өтті?</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Алматы</button>
+                  <button class="option-btn" data-correct="false">Астана</button>
+                  <button class="option-btn" data-correct="false">Шымкент</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
-          <!-- 5 -->
-          <div class="task-card" data-quiz>
-            <div class="task-title">5-тапсырма</div>
-            <div class="task-text">
-              Тоқырау кезеңіне тән сипаттарды таңда.
+              <!-- 4 -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">4-тапсырма</div>
+                <div class="task-text">
+                  «Гласность» сөзінің мағынасы қандай?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Қатаң бақылау</button>
+                  <button class="option-btn" data-correct="true">Ашықтық, еркін пікір айту</button>
+                  <button class="option-btn" data-correct="false">Салықты көбейту</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 5 -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">5-тапсырма</div>
+                <div class="task-text">
+                  Тоқырау кезеңіне тән сипаттарды таңда.
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Экономиканың баяулауы</button>
+                  <button class="option-btn" data-correct="true">Халық тұрмысының төмендеуі</button>
+                  <button class="option-btn" data-correct="false">Өнеркәсіптің кенеттен өте жылдам дамуы</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
             </div>
-            <div class="task-options">
-              <button class="option-btn" data-correct="true">Экономиканың баяулауы</button>
-              <button class="option-btn" data-correct="true">Халық тұрмысының төмендеуі</button>
-              <button class="option-btn" data-correct="false">Өнеркәсіптің кенеттен өте жылдам дамуы</button>
-            </div>
-            <div class="task-feedback"></div>
+
+            <button class="quiz-btn" data-reset="#perestroika">Таңдауды тазарту</button>
           </div>
 
         </div>
-
-        <button class="quiz-btn" data-reset="#perestroika">Таңдауды тазарту</button>
       </div>
-
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <!-- 5. ТӘУЕЛСІЗ ҚАЗАҚСТАН -->
-    <!-- 5. ТӘУЕЛСІЗ ҚАЗАҚСТАН -->
-<section class="section" id="independence">
-  <div class="section-header">
-    <h2 class="section-title">
-      <span class="icon" aria-hidden="true">🇰🇿</span>
-      Тәуелсіз Қазақстан (1991 жылдан бүгінге дейін)
-      <button class="read-btn" data-read="#independence-text">Мәтінді дауыстап оқу</button>
-      <button class="stop-btn">Оқуды тоқтату</button>
-    </h2>
-    <div class="section-subtitle">
-      Мемлекеттік тәуелсіздік, рәміздер, астананың өзгеруі, қазіргі Қазақстанның дамуы.
-    </div>
-  </div>
-
-  <div class="section-body" id="independence-text">
-    <div class="grid-2">
-      <!-- Сол жақ: түсіндірме -->
-      <div>
-        <p>
-          1991 жылы Қазақстан өзінің мемлекеттік тәуелсіздігін жариялады.
-          Бұл – Қазақстан тарихындағы жаңа дәуірдің басталуы. Еліміз
-          дербес мемлекет ретінде өз заңын, өз рәміздерін, өз ішкі және
-          сыртқы саясатын жүргізе бастады.
-        </p>
-
-        <h3>Тәуелсіздіктің жариялануы</h3>
-        <p>
-          1991 жылдың желтоқсан айында Қазақстан Республикасы
-          тәуелсіз мемлекет екенін ресми түрде бүкіл әлемге жариялады.
-          Осыдан кейін Қазақстан БҰҰ сияқты халықаралық ұйымдарға мүше болды,
-          басқа мемлекеттермен дипломатиялық қарым-қатынас орнатты.
-        </p>
-
-        <h3>Мемлекеттік рәміздер</h3>
-        <p>Тәуелсіз елдің өз рәміздері болуы керек. Қазақстанның мемлекеттік рәміздері:</p>
-        <ul class="simple-list">
-          <li>
-            <strong>Ту</strong> – көгілдір түсті тудың ортасында алтын күн, оның астында қыран құс,
-            сол жағында ұлттық өрнек бейнеленген.
-          </li>
-          <li>
-            <strong>Елтаңба</strong> – ортасында шанырақ, екі жағында пырақ тұлпарлар,
-            үстінде жұлдыз бейнеленген. Төменгі бөлігінде «Қазақстан» деген жазу бар.
-          </li>
-          <li>
-            <strong>Әнұран</strong> – ресми салтанатты ән. Мемлекеттік іс-шараларда, мектеп
-            жиындарында шырқалады.
-          </li>
-        </ul>
-
-        <h3>Астананың өзгеруі</h3>
-        <p>
-          Тәуелсіздік алғаннан кейін елдің астанасы Алматы қаласынан
-          солтүстікке қарай орналасқан Ақмола қаласына көшірілді. Кейін
-          бұл қала Астана деп аталды. Қазіргі уақытта да Астана – Қазақстанның
-          саяси орталығы, мұнда Парламент, Үкімет, министрліктер орналасқан.
-        </p>
-
-        <h3>Қазіргі Қазақстан</h3>
-        <p>
-          Бүгінгі Қазақстан – тәуелсіз мемлекет. Елде мектептер, университеттер,
-          зауыттар, зауыттар мен фабрикалар жұмыс істейді. Жаңа жолдар, көпірлер,
-          үйлер салынып жатыр. Қазақстан көптеген елдермен достық қарым-қатынаста.
-        </p>
-
-        <div class="concept-card">
-          <div class="concept-title">Маңызды ұғымдар</div>
-          <div class="concept-content">
-            <strong>Тәуелсіздік</strong> – мемлекеттің өз заңын, өз саясатын
-            өзі жүргізуі, басқа елдерге толық тәуелді болмауы.<br>
-            <strong>Мемлекеттік рәміздер</strong> – Ту, Елтаңба, Әнұран.<br>
-            <strong>Астана</strong> – мемлекеттің бас қаласы, саяси орталығы.<br>
-            <strong>Дипломатия</strong> – елдер арасындағы келіссөздер жүргізу, достық қатынас орнату.
-          </div>
+    <section class="section" id="independence">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon" aria-hidden="true">🇰🇿</span>
+          Тәуелсіз Қазақстан (1991 жылдан бүгінге дейін)
+          <button class="read-btn" data-read="#independence-text">Мәтінді дауыстап оқу</button>
+          <button class="stop-btn">Оқуды тоқтату</button>
+        </h2>
+        <div class="section-subtitle">
+          Мемлекеттік тәуелсіздік, рәміздер, астананың өзгеруі, қазіргі Қазақстанның дамуы.
         </div>
       </div>
 
-      <!-- Оң жақ: 5 тапсырма -->
-      <div>
-        
-      <div class="task-group-title">Тапсырмалар</div>
-<div class="tasks">
+      <div class="section-body" id="independence-text">
+        <div class="grid-2">
+          <!-- Сол жақ: түсіндірме -->
+          <div>
+            <p>
+              1991 жылы Қазақстан өзінің мемлекеттік тәуелсіздігін жариялады.
+              Бұл – Қазақстан тарихындағы жаңа дәуірдің басталуы. Еліміз
+              дербес мемлекет ретінде өз заңын, өз рәміздерін, өз ішкі және
+              сыртқы саясатын жүргізе бастады.
+            </p>
 
-  <!-- 1-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">1-тапсырма</div>
-    <div class="task-text">Қазақстан тәуелсіздігін қашан жариялады?</div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="false">1945 жыл</button>
-      <button class="option-btn" data-correct="true">1991 жыл</button>
-      <button class="option-btn" data-correct="false">2000 жыл</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+            <h3>Тәуелсіздіктің жариялануы</h3>
+            <p>
+              1991 жылдың желтоқсан айында Қазақстан Республикасы
+              тәуелсіз мемлекет екенін ресми түрде бүкіл әлемге жариялады.
+              Осыдан кейін Қазақстан БҰҰ сияқты халықаралық ұйымдарға мүше болды,
+              басқа мемлекеттермен дипломатиялық қарым-қатынас орнатты.
+            </p>
 
-  <!-- 2-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">2-тапсырма</div>
-    <div class="task-text">Қазақстанның мемлекеттік рәміздерін таңда.</div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="true">Ту, Елтаңба, Әнұран</button>
-      <button class="option-btn" data-correct="false">Кітап, Дәптер, Тәсбе</button>
-      <button class="option-btn" data-correct="false">Гүл, Ағаш, Өзен</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+            <h3>Мемлекеттік рәміздер</h3>
+            <p>Тәуелсіз елдің өз рәміздері болуы керек. Қазақстанның мемлекеттік рәміздері:</p>
+            <ul class="simple-list">
+              <li>
+                <strong>Ту</strong> – көгілдір түсті тудың ортасында алтын күн, оның астында қыран құс,
+                сол жағында ұлттық өрнек бейнеленген.
+              </li>
+              <li>
+                <strong>Елтаңба</strong> – ортасында шанырақ, екі жағында пырақ тұлпарлар,
+                үстінде жұлдыз бейнеленген. Төменгі бөлігінде «Қазақстан» деген жазу бар.
+              </li>
+              <li>
+                <strong>Әнұран</strong> – ресми салтанатты ән. Мемлекеттік іс-шараларда, мектеп
+                жиындарында шырқалады.
+              </li>
+            </ul>
 
-  <!-- 3-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">3-тапсырма</div>
-    <div class="task-text">Қазақстан туында қандай бейнелер бар?</div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="true">Күн, қыран, өрнек</button>
-      <button class="option-btn" data-correct="false">Ай, жұлдыз</button>
-      <button class="option-btn" data-correct="false">Балға және орақ</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+            <h3>Астананың өзгеруі</h3>
+            <p>
+              Тәуелсіздік алғаннан кейін елдің астанасы Алматы қаласынан
+              солтүстікке қарай орналасқан Ақмола қаласына көшірілді. Кейін
+              бұл қала Астана деп аталды. Қазіргі уақытта да Астана – Қазақстанның
+              саяси орталығы, мұнда Парламент, Үкімет, министрліктер орналасқан.
+            </p>
 
-  <!-- 4-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">4-тапсырма</div>
-    <div class="task-text">Астана дегеніміз не?</div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="false">Демалыс аймағы</button>
-      <button class="option-btn" data-correct="true">Мемлекеттің бас қаласы</button>
-      <button class="option-btn" data-correct="false">Көрші елдің қаласы</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+            <h3>Қазіргі Қазақстан</h3>
+            <p>
+              Бүгінгі Қазақстан – тәуелсіз мемлекет. Елде мектептер, университеттер,
+              зауыттар, зауыттар мен фабрикалар жұмыс істейді. Жаңа жолдар, көпірлер,
+              үйлер салынып жатыр. Қазақстан көптеген елдермен достық қарым-қатынаста.
+            </p>
 
-  <!-- 5-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">5-тапсырма</div>
-    <div class="task-text">
-      Тәуелсіз ел болу үшін қандай белгілер маңызды?
-    </div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="true">Өз заңы, рәміздері, астанасы</button>
-      <button class="option-btn" data-correct="false">Тек үлкен территория</button>
-      <button class="option-btn" data-correct="false">Тек көп адам саны</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+            <div class="concept-card">
+              <div class="concept-title">Маңызды ұғымдар</div>
+              <div class="concept-content">
+                <strong>Тәуелсіздік</strong> – мемлекеттің өз заңын, өз саясатын
+                өзі жүргізуі, басқа елдерге толық тәуелді болмауы.<br>
+                <strong>Мемлекеттік рәміздер</strong> – Ту, Елтаңба, Әнұран.<br>
+                <strong>Астана</strong> – мемлекеттің бас қаласы, саяси орталығы.<br>
+                <strong>Дипломатия</strong> – елдер арасындағы келіссөздер жүргізу, достық қатынас орнату.
+              </div>
+            </div>
+          </div>
 
-  <!-- 6-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">6-тапсырма</div>
-    <div class="task-text">
-      Елтаңбаның ортасында не бейнеленген?
-    </div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="true">Шаңырақ</button>
-      <button class="option-btn" data-correct="false">Тау</button>
-      <button class="option-btn" data-correct="false">Өзен</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+          <!-- Оң жақ: 8 тапсырма -->
+          <div>
+            <div class="task-group-title">Тапсырмалар</div>
+            <div class="tasks">
 
-  <!-- 7-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">7-тапсырма</div>
-    <div class="task-text">
-      Қазақстан қандай халықаралық ұйымға мүше болды?
-    </div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="true">Біріккен Ұлттар Ұйымы (БҰҰ)</button>
-      <button class="option-btn" data-correct="false">Ұлыбритания Патшалығы</button>
-      <button class="option-btn" data-correct="false">Африка Одағы</button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+              <!-- 1-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">1-тапсырма</div>
+                <div class="task-text">Қазақстан тәуелсіздігін қашан жариялады?</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">1945 жыл</button>
+                  <button class="option-btn" data-correct="true">1991 жыл</button>
+                  <button class="option-btn" data-correct="false">2000 жыл</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
-  <!-- 8-тапсырма -->
-  <div class="task-card" data-quiz>
-    <div class="task-title">8-тапсырма</div>
-    <div class="task-text">
-      Тәуелсіз Қазақстанда қандай өзгерістер болды?
-    </div>
-    <div class="task-options">
-      <button class="option-btn" data-correct="true">
-        Жаңа заңдар қабылданды, қала мен ауылдар жаңарды, халықаралық қатынастар нығайды
-      </button>
-      <button class="option-btn" data-correct="false">
-        Барлық мектептер жабылды
-      </button>
-      <button class="option-btn" data-correct="false">
-        Халық басқа елге толық көшіп кетті
-      </button>
-    </div>
-    <div class="task-feedback"></div>
-  </div>
+              <!-- 2-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">2-тапсырма</div>
+                <div class="task-text">Қазақстанның мемлекеттік рәміздерін таңда.</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Ту, Елтаңба, Әнұран</button>
+                  <button class="option-btn" data-correct="false">Кітап, Дәптер, Тәсбе</button>
+                  <button class="option-btn" data-correct="false">Гүл, Ағаш, Өзен</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
-</div>
+              <!-- 3-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">3-тапсырма</div>
+                <div class="task-text">Қазақстан туында қандай бейнелер бар?</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Күн, қыран, өрнек</button>
+                  <button class="option-btn" data-correct="false">Ай, жұлдыз</button>
+                  <button class="option-btn" data-correct="false">Балға және орақ</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
-<button class="quiz-btn" data-reset="#independence">
-  Таңдауды тазарту
-</button>
+              <!-- 4-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">4-тапсырма</div>
+                <div class="task-text">Астана дегеніміз не?</div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="false">Демалыс аймағы</button>
+                  <button class="option-btn" data-correct="true">Мемлекеттің бас қаласы</button>
+                  <button class="option-btn" data-correct="false">Көрші елдің қаласы</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
 
+              <!-- 5-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">5-тапсырма</div>
+                <div class="task-text">
+                  Тәуелсіз ел болу үшін қандай белгілер маңызды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Өз заңы, рәміздері, астанасы</button>
+                  <button class="option-btn" data-correct="false">Тек үлкен территория</button>
+                  <button class="option-btn" data-correct="false">Тек көп адам саны</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 6-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">6-тапсырма</div>
+                <div class="task-text">
+                  Елтаңбаның ортасында не бейнеленген?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Шаңырақ</button>
+                  <button class="option-btn" data-correct="false">Тау</button>
+                  <button class="option-btn" data-correct="false">Өзен</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 7-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">7-тапсырма</div>
+                <div class="task-text">
+                  Қазақстан қандай халықаралық ұйымға мүше болды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">Біріккен Ұлттар Ұйымы (БҰҰ)</button>
+                  <button class="option-btn" data-correct="false">Ұлыбритания Патшалығы</button>
+                  <button class="option-btn" data-correct="false">Африка Одағы</button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+              <!-- 8-тапсырма -->
+              <div class="task-card" data-quiz>
+                <div class="task-title">8-тапсырма</div>
+                <div class="task-text">
+                  Тәуелсіз Қазақстанда қандай өзгерістер болды?
+                </div>
+                <div class="task-options">
+                  <button class="option-btn" data-correct="true">
+                    Жаңа заңдар қабылданды, қала мен ауылдар жаңарды, халықаралық қатынастар нығайды
+                  </button>
+                  <button class="option-btn" data-correct="false">
+                    Барлық мектептер жабылды
+                  </button>
+                  <button class="option-btn" data-correct="false">
+                    Халық басқа елге толық көшіп кетті
+                  </button>
+                </div>
+                <div class="task-feedback"></div>
+              </div>
+
+            </div>
+
+            <button class="quiz-btn" data-reset="#independence">
+              Таңдауды тазарту
+            </button>
+
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- 6. СӨЙЛЕУДІ ДАМЫТУ ЖАТТЫҒУЛАРЫ -->
+    <section class="section" id="speech">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon" aria-hidden="true">🗣️</span>
+          Сөйлеуді дамыту жаттығулары
+          <button class="read-btn" data-read="#speech-text">
+            Мәтінді дауыстап оқу
+          </button>
+          <button class="stop-btn">
+            Оқуды тоқтату
+          </button>
+        </h2>
+        <div class="section-subtitle">
+          Қысқа сөйлемдер құрау, тыңдау және қайталау, өз ойын айтуға үйрету.
+        </div>
+      </div>
+
+      <div class="section-body" id="speech-text">
+        <div class="grid-2">
+          <!-- Сол жақ: түсіндіру -->
+          <div>
+            <p>
+              Бұл бөлім тілі кеш дамып жатқан оқушыларға арналған. Мұнда бала
+              қысқа, түсінікті сөйлемдер құрастырады, мұғаліммен бірге дауыстап
+              оқиды, тыңдап қайталайды. Мақсат – сөз қорын көбейту, сөйлемді
+              дұрыс құрау, өз ойын айтуға үйрету.
+            </p>
+
+            <!-- Жаттығу 1: Сөзден сөйлем құра -->
+            <div class="speech-block sentence-builder" data-answer="Менің елім Қазақстан.">
+              <div class="task-title">1-жаттығу: Сөздерден сөйлем құра</div>
+              <div class="task-text">
+                Төмендегі сөздерді дұрыс ретпен басып, сөйлем құрастыр.
+              </div>
+              <div class="label-soft">Дайын сөйлем: «Менің елім Қазақстан.»</div>
+              <div class="word-bank" data-words="Менің,елім Қазақстан."></div>
+              <div class="sentence-output" aria-label="Құрылған сөйлем"></div>
+              <div class="sentence-controls">
+                <button class="sentence-btn" data-check-sentence>Тексеру</button>
+                <button class="sentence-btn" data-clear-sentence>Тазарту</button>
+                <button class="sentence-btn" data-read-sentence>Дауыстап оқу</button>
+              </div>
+              <div class="task-feedback"></div>
+            </div>
+
+            <!-- Жаттығу 2: Екінші сөйлем -->
+            <div class="speech-block sentence-builder" data-answer="Қазақстан – менің Отаным.">
+              <div class="task-title">2-жаттығу: Тағы бір сөйлем құра</div>
+              <div class="task-text">
+                Осы сөздерден: «Қазақстан – менің Отаным.» деген сөйлемді құрастыр.
+              </div>
+              <div class="word-bank" data-words="Отаным.,–,Қазақстан,менің"></div>
+              <div class="sentence-output" aria-label="Құрылған сөйлем"></div>
+              <div class="sentence-controls">
+                <button class="sentence-btn" data-check-sentence>Тексеру</button>
+                <button class="sentence-btn" data-clear-sentence>Тазарту</button>
+                <button class="sentence-btn" data-read-sentence>Дауыстап оқу</button>
+              </div>
+              <div class="task-feedback"></div>
+            </div>
+
+            <div class="note-box">
+              Кеңес: оқушы сөйлемді құрастырғаннан кейін мұғалім онымен бірге
+              сөйлемді буынға бөліп, баяу, анық түрде қайталап оқыта алады.
+            </div>
+          </div>
+
+          <!-- Оң жақ: тыңда және қайталау, қысқа мәтін -->
+          <div>
+            <!-- Жаттығу 3: Тыңда және қайтала -->
+            <div class="speech-block">
+              <div class="task-title">3-жаттығу: Тыңда және қайтала</div>
+              <div class="task-text">
+                Төмендегі сөйлемдердің бірін таңда. Батырманы бас, сөйлемді тыңда,
+                содан кейін өзің қайталап айт.
+              </div>
+              <div class="phrase-list">
+                <button class="phrase-btn" data-phrase="Қазақстан – бейбіт ел.">
+                  <span class="icon">🔊</span>
+                  <span>Қазақстан – бейбіт ел.</span>
+                </button>
+                <button class="phrase-btn" data-phrase="Біз тарих сабағын оқимыз.">
+                  <span class="icon">🔊</span>
+                  <span>Біз тарих сабағын оқимыз.</span>
+                </button>
+                <button class="phrase-btn" data-phrase="Мен Отанымды жақсы көремін.">
+                  <span class="icon">🔊</span>
+                  <span>Мен Отанымды жақсы көремін.</span>
+                </button>
+              </div>
+              <div class="mini-smiley-row" aria-hidden="true">
+                <span>🙂</span><span>😊</span><span>🤗</span>
+              </div>
+            </div>
+
+            <!-- Жаттығу 4: Бос орынды толтыр (ауызша айтуға ыңғайлы) -->
+            <div class="speech-block" data-quiz>
+              <div class="task-title">4-жаттығу: Бос орынды толықтыр</div>
+              <div class="task-text">
+                Сөйлемді аяқтайтын дұрыс сөзді таңда: «Менің туған ... – Қазақстан».
+              </div>
+              <div class="task-options">
+                <button class="option-btn" data-correct="false">қалам</button>
+                <button class="option-btn" data-correct="true">елім</button>
+                <button class="option-btn" data-correct="false">кітабым</button>
+              </div>
+              <div class="task-feedback"></div>
+            </div>
+
+            <!-- Жаттығу 5: Қысқа әңгіме -->
+            <div class="speech-block">
+              <div class="task-title">5-жаттығу: Қысқа әңгіме құра</div>
+              <div class="task-text">
+                Төменгі өріске Қазақстан туралы 2–3 қысқа сөйлем жаз. Мысалы:
+                «Мен Қазақстанда тұрамын. Біздің ел кең, әдемі.»
+              </div>
+              <div class="short-story-box">
+                <label class="label-soft" for="shortStory">Өз әңгімең:</label>
+                <textarea id="shortStory" placeholder="Мен ..."></textarea>
+                <div class="note-box">
+                  Мұғалім оқушыға дайын сөйлем үлгілерін беріп, бірге құрастырып жазуына көмектесе алады.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Жаттығу 4: Салыстыр және белгіле -->
+<div class="speech-block">
+    <div class="task-title">4-жаттығу: Салыстыр және белгіле</div>
+    <div class="task-text">
+      Негізгі сөйлем: <strong>«Мен Отанымды жақсы көремін.»</strong><br>
+      Төмендегі сөйлемдердің әрқайсысын осы сөйлеммен салыстыр.
+      Егер мағынасы ұқсас болса – «Ұқсас», басқа болса – «Басқа» батырмасын бас.
+    </div>
+  
+    <div class="compare-grid">
+  
+      <!-- 1-қатар -->
+      <div class="compare-row" data-quiz>
+        <div class="compare-text">Мен Қазақстанды сүйемін.</div>
+        <div class="task-options">
+          <button class="option-btn" data-correct="true">Ұқсас</button>
+          <button class="option-btn" data-correct="false">Басқа</button>
+        </div>
+        <div class="task-feedback"></div>
+      </div>
+  
+      <!-- 2-қатар -->
+      <div class="compare-row" data-quiz>
+        <div class="compare-text">Мен тарих сабағын жек көремін.</div>
+        <div class="task-options">
+          <button class="option-btn" data-correct="false">Ұқсас</button>
+          <button class="option-btn" data-correct="true">Басқа</button>
+        </div>
+        <div class="task-feedback"></div>
+      </div>
+  
+      <!-- 3-қатар -->
+      <div class="compare-row" data-quiz>
+        <div class="compare-text">Мен Отаныммен мақтанамын.</div>
+        <div class="task-options">
+          <button class="option-btn" data-correct="true">Ұқсас</button>
+          <button class="option-btn" data-correct="false">Басқа</button>
+        </div>
+        <div class="task-feedback"></div>
+      </div>
+  
     </div>
   </div>
-</section>
-
-
-    <!-- 6. ӨЛКЕТАНУ -->
+  
+    <!-- 7. ӨЛКЕТАНУ -->
     <section class="section" id="local">
       <div class="section-header">
         <h2 class="section-title">
@@ -1595,61 +2095,64 @@ body.large-text * {
           }
         });
       });
-  
+
       // ===== Қаріпті үлкейту / кішірейту =====
       var fontToggle = document.getElementById("fontToggle");
-if (fontToggle) {
-  fontToggle.addEventListener("click", function () {
-    document.body.classList.toggle("large-text");
-    this.textContent = document.body.classList.contains("large-text")
-      ? "Қаріпті кішірейту"
-      : "Қаріпті үлкейту";
-  });
-}
+      if (fontToggle) {
+        fontToggle.addEventListener("click", function () {
+          document.body.classList.toggle("large-text");
+          this.textContent = document.body.classList.contains("large-text")
+            ? "Қаріпті кішірейту"
+            : "Қаріпті үлкейту";
+        });
+      }
 
-  
-      // ===== Контраст режимі =====
+      // ===== Контраст режимі (қаласаңыз, кейін қосуға болады) =====
       var contrastToggle = document.getElementById("contrastToggle");
       if (contrastToggle) {
         contrastToggle.addEventListener("click", function () {
           document.body.classList.toggle("high-contrast");
         });
       }
-  
+
       // ===== Қарапайым викторина логикасы =====
       document.querySelectorAll("[data-quiz]").forEach(function (card) {
         var options = card.querySelectorAll(".option-btn");
         var feedback = card.querySelector(".task-feedback");
-  
+
         options.forEach(function (opt) {
           opt.addEventListener("click", function () {
             options.forEach(function (o) {
               o.classList.remove("correct", "incorrect");
             });
-  
+
             var correct = opt.getAttribute("data-correct") === "true";
             if (correct) {
               opt.classList.add("correct");
-              feedback.textContent = "Дұрыс! Жарайсың!";
-              feedback.classList.remove("no");
-              feedback.classList.add("ok");
+              if (feedback) {
+                feedback.textContent = "Дұрыс! Жарайсың!";
+                feedback.classList.remove("no");
+                feedback.classList.add("ok");
+              }
             } else {
               opt.classList.add("incorrect");
-              feedback.textContent = "Әзірге дұрыс емес. Қайта көрейік.";
-              feedback.classList.remove("ok");
-              feedback.classList.add("no");
+              if (feedback) {
+                feedback.textContent = "Әзірге дұрыс емес. Қайта көрейік.";
+                feedback.classList.remove("ok");
+                feedback.classList.add("no");
+              }
             }
           });
         });
       });
-  
+
       // ===== Викторинаны тазарту =====
       document.querySelectorAll("[data-reset]").forEach(function (btn) {
         btn.addEventListener("click", function () {
           var selector = btn.getAttribute("data-reset");
           var section = document.querySelector(selector);
           if (!section) return;
-  
+
           section.querySelectorAll(".option-btn").forEach(function (o) {
             o.classList.remove("correct", "incorrect");
           });
@@ -1659,114 +2162,203 @@ if (fontToggle) {
           });
         });
       });
-  
+
       // ===== Web Speech API арқылы мәтінді дауыстап оқу =====
-     // ===== Web Speech API арқылы мәтінді дауыстап оқу =====
-if (!("speechSynthesis" in window)) {
-  // Мүлде қолдау жоқ болса – батырмаларды сөндіреміз
-  document.querySelectorAll(".read-btn").forEach(function (btn) {
-    btn.disabled = true;
-    btn.textContent = "Құрал қолжетімсіз";
-  });
-  alert("Бұл браузерде дауыстап оқу (speechSynthesis) қолдамайды.");
-  return;
-}
+      if (!("speechSynthesis" in window)) {
+        document.querySelectorAll(".read-btn").forEach(function (btn) {
+          btn.disabled = true;
+          btn.textContent = "Құрал қолжетімсіз";
+        });
+        alert("Бұл браузерде дауыстап оқу (speechSynthesis) қолдамайды.");
+        return;
+      }
 
-var availableVoices = [];
-var selectedVoice = null;
+      var availableVoices = [];
+      var selectedVoice = null;
 
-function chooseVoice() {
-  availableVoices = window.speechSynthesis.getVoices();
-  if (!availableVoices || availableVoices.length === 0) {
-    return;
-  }
+      function chooseVoice() {
+        availableVoices = window.speechSynthesis.getVoices();
+        if (!availableVoices || availableVoices.length === 0) {
+          return;
+        }
 
-  // 1) Қазақ дауысы болса – соны
-  selectedVoice = availableVoices.find(function (v) {
-    return v.lang && v.lang.toLowerCase().indexOf("kk") !== -1;
-  });
+        // 1) Қазақ дауысы болса – соны
+        selectedVoice = availableVoices.find(function (v) {
+          return v.lang && v.lang.toLowerCase().indexOf("kk") !== -1;
+        });
 
-  // 2) Қазақша табылмаса – орысша
-  if (!selectedVoice) {
-    selectedVoice = availableVoices.find(function (v) {
-      return v.lang && v.lang.toLowerCase().indexOf("ru") === 0;
-    });
-  }
+        // 2) Қазақша табылмаса – орысша
+        if (!selectedVoice) {
+          selectedVoice = availableVoices.find(function (v) {
+            return v.lang && v.lang.toLowerCase().indexOf("ru") === 0;
+          });
+        }
 
-  // 3) Ол да жоқ болса – кез келгені
-  if (!selectedVoice) {
-    selectedVoice = availableVoices[0];
-  }
-}
+        // 3) Ол да жоқ болса – кез келгені
+        if (!selectedVoice) {
+          selectedVoice = availableVoices[0];
+        }
+      }
 
-// Chrome-да дауыстар кешігіп жүктеледі
-window.speechSynthesis.onvoiceschanged = function () {
-  chooseVoice();
-};
-// Көп жағдайда бірден де шақырылып кетеді
-chooseVoice();
+      window.speechSynthesis.onvoiceschanged = function () {
+        chooseVoice();
+      };
+      chooseVoice();
 
-function readText(selector) {
-  var element = document.querySelector(selector);
-  if (!element) {
-    alert("Мәтін табылған жоқ: " + selector);
-    return;
-  }
+      function speakText(text) {
+        if (!text) return;
+        window.speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
 
-  var text = (element.innerText || element.textContent || "").trim();
-  if (!text) {
-    alert("Оқитын мәтін бос.");
-    return;
-  }
+        if (selectedVoice) {
+          utter.voice = selectedVoice;
+          utter.lang = selectedVoice.lang || "kk-KZ";
+        } else {
+          utter.lang = "kk-KZ";
+        }
 
-  // Бұрынғы оқуды тоқтатамыз
-  window.speechSynthesis.cancel();
+        utter.rate = 0.95;
+        utter.pitch = 1;
+        utter.volume = 1;
+        window.speechSynthesis.speak(utter);
+      }
 
-  var utter = new SpeechSynthesisUtterance(text);
+      function readText(selector) {
+        var element = document.querySelector(selector);
+        if (!element) {
+          alert("Мәтін табылған жоқ: " + selector);
+          return;
+        }
 
-  if (selectedVoice) {
-    utter.voice = selectedVoice;
-    utter.lang = selectedVoice.lang || "kk-KZ";
-  } else {
-    utter.lang = "kk-KZ";
-  }
+        var text = (element.innerText || element.textContent || "").trim();
+        if (!text) {
+          alert("Оқитын мәтін бос.");
+          return;
+        }
 
-  utter.rate = 0.95;
-  utter.pitch = 1;
-  utter.volume = 1;
+        speakText(text);
+      }
 
-  window.speechSynthesis.speak(utter);
-}
+      function stopReading() {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+      }
 
-// ===== Оқуды тоқтату функциясы =====
-function stopReading() {
-  if ("speechSynthesis" in window) {
-    window.speechSynthesis.cancel();
-  }
-}
+      // "Мәтінді дауыстап оқу" батырмаларына өңдеу
+      document.querySelectorAll(".read-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var selector = btn.getAttribute("data-read");
+          if (!selector) {
+            alert("data-read атрибуты қойылмаған.");
+            return;
+          }
+          readText(selector);
+        });
+      });
 
-// "Мәтінді дауыстап оқу" батырмаларына өңдеу
-document.querySelectorAll(".read-btn").forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    var selector = btn.getAttribute("data-read");
-    if (!selector) {
-      alert("data-read атрибуты қойылмаған.");
-      return;
-    }
-    readText(selector);
-  });
-});
+      // "Оқуды тоқтату" батырмаларына өңдеу
+      document.querySelectorAll(".stop-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          stopReading();
+        });
+      });
 
-// "Оқуды тоқтату" батырмаларына өңдеу
-document.querySelectorAll(".stop-btn").forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    stopReading();
-  });
-});
+      // ===== Сөйлем құрастыру жаттығулары =====
+      document.querySelectorAll(".sentence-builder").forEach(function (block) {
+        var wordBank = block.querySelector(".word-bank");
+        var sentenceOutput = block.querySelector(".sentence-output");
+        var feedback = block.querySelector(".task-feedback");
+        var answer = (block.getAttribute("data-answer") || "").trim();
 
+        var wordsStr = wordBank ? wordBank.getAttribute("data-words") : "";
+        var words = wordsStr ? wordsStr.split(",") : [];
+        var currentWords = [];
+
+        if (wordBank) {
+          words.forEach(function (w) {
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "word-pill";
+            btn.textContent = w.trim();
+            btn.addEventListener("click", function () {
+              currentWords.push(w.trim());
+              sentenceOutput.textContent = currentWords.join(" ");
+              btn.classList.add("used");
+            });
+            wordBank.appendChild(btn);
+          });
+        }
+
+        function clearSentence() {
+          currentWords = [];
+          if (sentenceOutput) sentenceOutput.textContent = "";
+          if (feedback) {
+            feedback.textContent = "";
+            feedback.classList.remove("ok", "no");
+          }
+          if (wordBank) {
+            wordBank.querySelectorAll(".word-pill").forEach(function (p) {
+              p.classList.remove("used");
+            });
+          }
+        }
+
+        var clearBtn = block.querySelector("[data-clear-sentence]");
+        if (clearBtn) {
+          clearBtn.addEventListener("click", function () {
+            clearSentence();
+          });
+        }
+
+        var checkBtn = block.querySelector("[data-check-sentence]");
+        if (checkBtn) {
+          checkBtn.addEventListener("click", function () {
+            var built = currentWords.join(" ").trim();
+            if (!built) {
+              if (feedback) {
+                feedback.textContent = "Алдымен сөздерді таңда.";
+                feedback.classList.remove("ok");
+                feedback.classList.add("no");
+              }
+              return;
+            }
+            if (built === answer) {
+              if (feedback) {
+                feedback.textContent = "Дұрыс сөйлем! Өте жақсы!";
+                feedback.classList.remove("no");
+                feedback.classList.add("ok");
+              }
+            } else {
+              if (feedback) {
+                feedback.textContent = "Сөздердің ретін тағы бір рет қарап көр.";
+                feedback.classList.remove("ok");
+                feedback.classList.add("no");
+              }
+            }
+          });
+        }
+
+        var readSentenceBtn = block.querySelector("[data-read-sentence]");
+        if (readSentenceBtn) {
+          readSentenceBtn.addEventListener("click", function () {
+            var built = currentWords.join(" ").trim();
+            if (!built) {
+              built = answer;
+            }
+            speakText(built);
+          });
+        }
+      });
+
+      // ===== Тыңда және қайталау – қысқа сөйлемдер =====
+      document.querySelectorAll(".phrase-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var phrase = btn.getAttribute("data-phrase");
+          speakText(phrase);
+        });
+      });
     });
   </script>
-  
-  
 </body>
 </html>
