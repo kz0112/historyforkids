@@ -2223,22 +2223,25 @@
       chooseVoice();
 
       function speakText(text) {
-        if (!text) return;
-        window.speechSynthesis.cancel();
-        var utter = new SpeechSynthesisUtterance(text);
+  if (!text) return;
+  
+  window.speechSynthesis.cancel();
+  var utter = new SpeechSynthesisUtterance(text);
 
-        if (selectedVoice) {
-          utter.voice = selectedVoice;
-          utter.lang = selectedVoice.lang || "kk-KZ";
-        } else {
-          utter.lang = "kk-KZ";
-        }
+  if (selectedVoice) {
+    utter.voice = selectedVoice;
+    utter.lang = selectedVoice.lang || "kk-KZ";
+  } else {
+    utter.lang = "kk-KZ";
+  }
 
-        utter.rate = 0.95;
-        utter.pitch = 1;
-        utter.volume = 1;
-        window.speechSynthesis.speak(utter);
-      }
+  utter.rate = 0.95;   // сөйлеу жылдамдығы
+  utter.pitch = 1.1;   // әйел дауысына жақын жоғары тембр
+  utter.volume = 1;
+
+  window.speechSynthesis.speak(utter);
+}
+
 
       function readText(selector) {
         var element = document.querySelector(selector);
@@ -2379,4 +2382,3 @@
   </script>
 </body>
 </html>
-
