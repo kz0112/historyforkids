@@ -2176,29 +2176,46 @@
       var availableVoices = [];
       var selectedVoice = null;
 
-      function chooseVoice() {
-        availableVoices = window.speechSynthesis.getVoices();
-        if (!availableVoices || availableVoices.length === 0) {
-          return;
-        }
+    function chooseVoice() {
+  availableVoices = window.speechSynthesis.getVoices();
+  if (!availableVoices || availableVoices.length === 0) return;
 
-        // 1) Қазақ дауысы болса – соны
-        selectedVoice = availableVoices.find(function (v) {
-          return v.lang && v.lang.toLowerCase().indexOf("kk") !== -1;
-        });
+  // 1) ЕҢ АЛДЫМЕН ҚАЗАҚША ӘЙЕЛ ДАУЫСЫН ТАБУҒА ТЫРЫСАМЫЗ
+  selectedVoice = availableVoices.find(v =>
+    v.name.toLowerCase().includes("google") &&
+    (v.lang.toLowerCase() === "kk-kz" || v.lang.toLowerCase().includes("kk"))
+  );
 
-        // 2) Қазақша табылмаса – орысша
-        if (!selectedVoice) {
-          selectedVoice = availableVoices.find(function (v) {
-            return v.lang && v.lang.toLowerCase().indexOf("ru") === 0;
-          });
-        }
+  // 2) Егер нақты қазақша әйел дауысы болмаса – Google female voice таңдауға тырысамыз
+  if (!selectedVoice) {
+    selectedVoice = availableVoices.find(v =>
+      v.name.toLowerCase().includes("google") &&
+      v.voiceURI.toLowerCase().includes("female")
+    );
+  }
 
-        // 3) Ол да жоқ болса – кез келгені
-        if (!selectedVoice) {
-          selectedVoice = availableVoices[0];
-        }
-      }
+  // 3) Әйел дауыс табылмаса – kk-KZ тіліндегі кез келген дауысты қолдану
+  if (!selectedVoice) {
+    selectedVoice = availableVoices.find(v =>
+      v.lang.toLowerCase().includes("kk")
+    );
+  }
+
+  // 4) Ештеңе табылмаса – орыс әйел дауысын аламыз
+  if (!selectedVoice) {
+    selectedVoice = availableVoices.find(v =>
+      v.lang.toLowerCase().startsWith("ru") &&
+      (v.name.toLowerCase().includes("female") ||
+       v.name.toLowerCase().includes("жен"))
+    );
+  }
+
+  // 5) Соңғы жол – тізімдегі 1-ші дауыс
+  if (!selectedVoice) {
+    selectedVoice = availableVoices[0];
+  }
+}
+
 
       window.speechSynthesis.onvoiceschanged = function () {
         chooseVoice();
@@ -2362,3 +2379,4 @@
   </script>
 </body>
 </html>
+
